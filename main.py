@@ -43,7 +43,7 @@ def _sum(iterable: list) -> float:  # Why? try print(_sum([0.1]*100)) and print(
 def _exec(line: str) -> None:
     gr, line = rep(line)
     for i in range(len(line)):
-        if line[i] in en and line[i - 1: i + 1] != "%s": exit(f"You need to use only {keywords['lang']} keywords")
+        if line[i] in en and line[i - 1: i + 1] != "%s" and "#" not in line[:i]: exit(f"You need to use only {keywords['lang']} keywords")
     for i in keywords: line = line.replace(i, keywords[i])
     line = line.replace("exec", "_exec").replace("sum", "_sum") % gr
     if "print" in line: exec(line, globals())
@@ -58,7 +58,7 @@ if len(argv) != 1:
     else:
         groups, text = rep(text)
         for i in range(len(text)):
-            if text[i] in en and text[i - 1: i + 1] != "%s": raise SyntaxError(f"In line {text[: i].count(newline)} you need to use only {keywords['lang']} keywords")
+            if text[i] in en and text[i - 1: i + 1] != "%s" and "#" not in text[text[:i].rfind("\n"): i]: raise SyntaxError(f"In line {text[: i].count(newline)} you need to use only {keywords['lang']} keywords")
         for i in keywords: text = text.replace(i, keywords[i])
         exec(text.replace("exec", "_exec").replace("sum", "_sum") % groups)
 # TODO: Write lang.json, I will do that in Hebrew, but it can be done in every non-latin language
