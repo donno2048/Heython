@@ -61,4 +61,4 @@ if len(argv) != 1:
             if text[i] in en and text[i - 1: i + 1] != "%s" and "#" not in text[text[:i].rfind("\n"): i]: raise SyntaxError(f"In line {text[: i].count(newline)} you need to use only {keywords['lang']} keywords")
         for i in keywords: text = text.replace(i, keywords[i])
         exec(text.replace("exec", "_exec").replace("sum", "_sum") % groups)
-# TODO: Write lang.json, I will do that in Hebrew, but it can be done in every non-latin language
+# lang.json is written to be compatible with Hebrew, but it can be done in every non-latin language
