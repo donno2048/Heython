@@ -42,15 +42,20 @@ def _sum(iterable: list) -> float:  # Why? try print(_sum([0.1]*100)) and print(
     return exact(partials) if partials else 0
 def _exec(line: str) -> None:
     gr, line = rep(line)
+    flag = True
     for i in range(len(line)):
-        if line[i] in en and line[i - 1: i + 1] != "%s" and "#" not in line[:i]: exit(f"You need to use only {keywords['lang']} keywords")
-    for i in keywords: line = line.replace(i, keywords[i])
-    line = line.replace("exec", "_exec").replace("sum", "_sum") % gr
-    if "print" in line: exec(line, globals())
-    else:
+        if line[i] in en and line[i - 1: i + 1] != "%s" and "#" not in line[:i] and flag:
+            print(f"You need to use only {keywords['lang']} keywords")
+            flag = False
+    if flag:
+        for i in keywords: line = line.replace(i, keywords[i])
+        line, e = line.replace("exec", "_exec").replace("sum", "_sum") % gr, None
         try: e = eval(line)
-        except: exec(line, globals())
-        else: print(e)
+        except:
+            try: exec(line, globals())
+            except BaseException as e: print(e)
+        else:
+            if e is not None: print(e)
 while len(argv) == 1: _exec(input(">>> "))
 if len(argv) != 1:
     try: text, newline = open(' '.join(argv[1:])).read(), "\n"
