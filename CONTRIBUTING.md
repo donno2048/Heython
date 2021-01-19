@@ -1,0 +1,3 @@
+Feel free to suggest other translations,
+
+I'm not completely satisfied with mine...
