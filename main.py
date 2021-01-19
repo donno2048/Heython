@@ -1,6 +1,6 @@
 from sys import argv
 from re import search, sub
-en, keywords = [chr(i) for i in list(range(65, 91)) + list(range(97, 123))], eval(open('lang.json').read())  # Do not support latin languages, there will be all the built-in keywords except Inheritances of Exception
+en, keywords = [chr(i) for i in list(range(65, 91)) + list(range(97, 123))], eval(open('lang.json').read())  # Do not support latin languages, it has all the built-in keywords except Inheritances of Exception and swapcase
 def rep(line: str) -> tuple:
     gr = []
     while s := search(r"\".*?(?<!\\)\"", line):  # Only support " not '
