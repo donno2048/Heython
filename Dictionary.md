@@ -5,7 +5,6 @@
 | Exception | חריגה |
 | False | שקר |
 | GeneratorExit | יציאת_מחולל |
-| Hebrew | lang |
 | KeyboardInterrupt | הפרעת_מקלדת |
 | None | כלום |
 | NotImplemented | לא_מקודד |
