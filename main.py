@@ -56,7 +56,12 @@ def _exec(line: str) -> None:
             except BaseException as e: print(e)
         else:
             if e is not None: print(e)
-while len(argv) == 1: _exec(input(">>> "))
+while len(argv) == 1:
+    line = None
+    while line is None:
+        try: line = input(">>> ")
+        except: print()
+    _exec(line)
 if len(argv) != 1:
     try: text, newline = open(' '.join(argv[1:])).read(), "\n"
     except: _exec(' '.join(argv[1:]))
