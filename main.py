@@ -1,5 +1,7 @@
+from os import system, name
 from sys import argv
 from re import search, sub
+if name == 'nt': system("chcp 1255 > nul")
 en, keywords = [chr(i) for i in list(range(65, 91)) + list(range(97, 123))], eval(open('lang.json').read())  # Do not support latin languages, it has all the built-in keywords except Inheritances of Exception and swapcase
 def rep(line: str) -> tuple:
     gr = []
@@ -60,7 +62,8 @@ while len(argv) == 1:
     line = None
     while line is None:
         try: line = input(">>> ")
-        except: print()
+        except Exception: print()
+        except BaseException: exit()
     _exec(line)
 if len(argv) != 1:
     try: text, newline = open(' '.join(argv[1:])).read(), "\n"
